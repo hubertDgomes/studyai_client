@@ -2,14 +2,14 @@ import Footer from '@/components/layout/Footer'
 import Header from '@/components/layout/Header'
 import React from 'react'
 
-const page = () => {
+function layout({children}:LayoutProps<"/">) {
   return (
     <>
-      <Header />
-      <div>page</div>
-      <Footer />
+    <Header/>
+    <div>{children}</div>
+    <Footer/>
     </>
   )
 }
 
-export default page
+export default layout
