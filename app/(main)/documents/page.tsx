@@ -1,7 +1,7 @@
 "use client"
 
 import Container from '@/components/Container'
-import getDocs from '@/lib/api/documents'
+import {getDocs} from '@/lib/api/documents'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
