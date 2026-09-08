@@ -3,13 +3,7 @@ import Header from '@/components/layout/Header'
 import React from 'react'
 
 const page = () => {
-  return (
-    <>
-      <Header />
-      <div>page</div>
-      <Footer />
-    </>
-  )
+  return null
 }
 
 export default page
