@@ -25,5 +25,22 @@ export const getDocsById = async ({id} : {id : string}) => {
   }
 };
 
+export const uploadDocs = async (file : File) => {
+  try {
+    const formData = new FormData()
+    formData.append('extractedText' , file) 
 
-export default {getDocs , getDocsById}
+    const res = await api.post("/api/ai/docsupload", formData ,{
+      headers : {
+        'Content-Type' : "multipart/form-data"
+      }
+    })
+    return res.data
+  } catch (err: any) {
+    console.log(err.response?.data?.message || err.message || "Failed to upload the documetns");
+    throw err;
+  }
+};
+
+
+export default {getDocs , getDocsById , uploadDocs}
