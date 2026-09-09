@@ -72,6 +72,10 @@ const DocumentPage = () => {
             />
           </>
         ) : null}
+
+        <Link href={`/documents/question/${id}`} className="mt-6 inline-flex w-fit items-center gap-3 rounded-full bg-[#3d4938] px-5 py-3 text-sm font-semibold text-[#fbf8f1] shadow-[0_8px_18px_rgba(61,73,56,0.16)] transition hover:bg-[#52614a]">
+           Ask Question<span aria-hidden="true">-&gt;</span>
+          </Link>
       </Container>
     </main>
   );
