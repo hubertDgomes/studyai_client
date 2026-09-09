@@ -22,7 +22,7 @@ const Header = () => {
           <a className="btn btn-ghost text-xl">StudyAI</a>
         </div>
         <div className="flex items-center gap-2">
-          <p>{user?.email}</p>
+          <p>{user?.name}</p>
           <div className="dropdown dropdown-end">
             <button onClick={handlelogout} className="btn btn-error">
               Log Out
