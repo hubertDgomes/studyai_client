@@ -6,7 +6,7 @@ export const AuthContext = createContext<any>(null)
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<any>(null)
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const checkInitialAuth = async () => {

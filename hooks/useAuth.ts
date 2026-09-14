@@ -32,7 +32,16 @@ const useAuth = () => {
         setLoading(true)
         try {
             const res = await signUp({ name, email, password })
-            return res
+            const signupUser = res.user || res.data?.user
+            if (signupUser) {
+                setUser(signupUser)
+                return signupUser
+            }
+
+            const loginRes = await login({ email, password })
+            const loginUser = loginRes.user || loginRes.data || loginRes
+            setUser(loginUser)
+            return loginUser
         }
         catch (err) {
             setUser(null)
