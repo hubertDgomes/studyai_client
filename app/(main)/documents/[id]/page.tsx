@@ -23,7 +23,7 @@ const DocumentPage = () => {
     const fetchDocs = async () => {
       try {
         const res = await getDocsById({ id });
-        setDocs(res.getDocs);
+        setDocs(res.getDocs || res.document || res.data || res);
       } catch (err) {
         console.error(err);
         setError("We could not open this document.");
