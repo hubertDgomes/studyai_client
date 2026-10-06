@@ -2,6 +2,7 @@ import axios, { create } from "axios";
 
 const api = axios.create({
   baseURL: "https://studyai-backend-fsq9.onrender.com",
+  // baseURL: "http://localhost:4000",
   withCredentials: true,
 });
 
@@ -19,7 +20,7 @@ export const getDocs = async () => {
   }
 };
 
-export const getDocsById = async ({ id }: { id: string }) => {
+export const  getDocsById = async ({ id }: { id: string }) => {
   try {
     const res = await api.get(`/api/ai/getdocs/${id}`);
     return res.data;

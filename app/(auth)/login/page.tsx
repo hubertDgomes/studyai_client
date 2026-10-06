@@ -15,6 +15,7 @@ const page = () => {
     e.preventDefault()
     try {
       const res = await handleLogin({ email, password });
+      // window.location.reload()
       router.push("/dashboard");
     } catch (err: any) {
       const message = err.response?.data?.message || "Login failed";

@@ -16,7 +16,8 @@ const page = () => {
     e.preventDefault()
     try{
       await handleSignUp({name , email , password})
-      router.push("/dashboard")
+      // window.location.reload()
+      router.push("/login");
     }
      catch (err: any) {
       const message = err.response?.data?.message || 'Signup failed'
