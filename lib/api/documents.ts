@@ -1,8 +1,8 @@
 import axios, { create } from "axios";
 
 const api = axios.create({
-  // baseURL: "https://studyai-backend-fsq9.onrender.com",
-  baseURL: "http://localhost:4000",
+  baseURL: "https://studyai-backend-fsq9.onrender.com",
+  // baseURL: "http://localhost:4000",
   withCredentials: true,
 });
 
