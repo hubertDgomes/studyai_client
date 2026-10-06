@@ -14,14 +14,32 @@ interface DocumentItem {
 const DocumentsPage = () => {
   const [docs, setDocs] = useState<DocumentItem[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState("")
 
   useEffect(() => {
     const fetchDocs = async () => {
       try {
         const res = await getDocs()
-        setDocs(res.getDocs)
+        const documentList = Array.isArray(res)
+          ? res
+          : Array.isArray(res?.getDocs)
+            ? res.getDocs
+            : Array.isArray(res?.data?.getDocs)
+              ? res.data.getDocs
+              : Array.isArray(res?.documents)
+                ? res.documents
+                : Array.isArray(res?.data)
+                  ? res.data
+                  : null
+
+        if (!documentList) {
+          throw new Error("The documents API returned an unexpected response.")
+        }
+
+        setDocs(documentList)
       } catch (err) {
-        console.error(err)
+        console.error("Failed to load documents:", err)
+        setError("We couldn't load your documents. Please refresh and try again.")
       } finally {
         setLoading(false)
       }
@@ -56,6 +74,11 @@ const DocumentsPage = () => {
             {[1, 2, 3, 4].map((item) => (
               <div key={item} className="h-40 animate-pulse rounded-2xl border border-[#ddd4c3] bg-[#fbf8f1]" />
             ))}
+          </div>
+        ) : error ? (
+          <div role="alert" className="rounded-2xl border border-[#d8cfbd] bg-[#fbf8f1] px-6 py-12 text-center shadow-[0_12px_35px_rgba(68,57,39,0.05)]">
+            <h2 className="font-serif text-3xl">Your documents could not load.</h2>
+            <p className="mt-3 text-sm leading-6 text-[#756f63]">{error}</p>
           </div>
         ) : docs.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-[#b9b09f] bg-[#fbf8f1] px-6 py-16 text-center shadow-[0_12px_35px_rgba(68,57,39,0.05)]">
