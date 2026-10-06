@@ -12,6 +12,17 @@ interface DocsTypes {
   createdAt: string;
 }
 
+const isDocument = (value: unknown): value is DocsTypes => {
+  if (typeof value !== "object" || value === null) return false;
+
+  const document = value as Record<string, unknown>;
+  return (
+    typeof document.summary === "string" &&
+    typeof document.title === "string" &&
+    typeof document.createdAt === "string"
+  );
+};
+
 const DocumentPage = () => {
   const params = useParams();
   const id = params.id as string;
@@ -23,9 +34,15 @@ const DocumentPage = () => {
     const fetchDocs = async () => {
       try {
         const res = await getDocsById({ id });
-        setDocs(res.getDocs || res.document || res.data || res);
+        const document = res?.getDocs ?? res?.document ?? res?.data ?? res;
+
+        if (!isDocument(document)) {
+          throw new Error("The document API returned an unexpected response.");
+        }
+
+        setDocs(document);
       } catch (err) {
-        console.error(err);
+        console.error("Failed to open document:", err);
         setError("We could not open this document.");
       } finally {
         setLoading(false);
@@ -71,7 +88,13 @@ const DocumentPage = () => {
               dangerouslySetInnerHTML={{ __html: cleanHTML }}
             />
           </>
-        ) : null}
+        ) : (
+          <div role="alert" className="mt-10 max-w-2xl rounded-2xl border border-[#d8cfbd] bg-[#fbf8f1] px-6 py-12 shadow-[0_12px_35px_rgba(68,57,39,0.05)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#9b594c]">Document unavailable</p>
+            <h1 className="mt-3 font-serif text-4xl tracking-[-0.03em]">We couldn’t display this document.</h1>
+            <p className="mt-3 text-sm leading-6 text-[#756f63]">The document response was empty or wasn’t in the expected format. Please return to your library and try again.</p>
+          </div>
+        )}
 
         <Link href={`/documents/question/${id}`} className="mt-6 inline-flex w-fit items-center gap-3 rounded-full bg-[#3d4938] px-5 py-3 text-sm font-semibold text-[#fbf8f1] shadow-[0_8px_18px_rgba(61,73,56,0.16)] transition hover:bg-[#52614a]">
            Ask Question<span aria-hidden="true">-&gt;</span>
