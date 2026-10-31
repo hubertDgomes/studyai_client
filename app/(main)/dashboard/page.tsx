@@ -48,7 +48,7 @@ const DashboardPage = () => {
               <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#68725d]">03</span>
               <h3 className="mt-10 font-serif text-3xl group-hover:text-[#3d4938]">Take a quiz</h3>
               <p className="mt-3 text-sm leading-6 text-[#756f63]">Test your knowledge when quizzes are ready.</p>
-              <span className="mt-8 block text-sm font-semibold text-[#3d4938]">Coming soon -&gt;</span>
+              <span className="mt-8 block text-sm font-semibold text-[#3d4938]">Take a quiz -&gt;</span>
             </Link>
           </div>
         </section>

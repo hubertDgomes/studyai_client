@@ -75,4 +75,24 @@ export const getTheAnwer = async ({
   }
 };
 
-export default { getDocs, getDocsById, uploadDocs, getTheAnwer};
+export const generateQuiz = async ({
+  id,
+  questionCount,
+}: {
+  id: string;
+  questionCount: number;
+}) => {
+  try {
+    const res = await api.post(`/api/ai/quiz/${id}`, { questionCount });
+    return res.data;
+  } catch (err: any) {
+    console.log(
+      err.response?.data?.message ||
+        err.message ||
+        "Failed to generate quiz. Please try again",
+    );
+    throw err;
+  }
+};
+
+export default { getDocs, getDocsById, uploadDocs, getTheAnwer, generateQuiz };

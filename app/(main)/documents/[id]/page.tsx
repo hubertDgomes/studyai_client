@@ -96,9 +96,14 @@ const DocumentPage = () => {
           </div>
         )}
 
-        <Link href={`/documents/question/${id}`} className="mt-6 inline-flex w-fit items-center gap-3 rounded-full bg-[#3d4938] px-5 py-3 text-sm font-semibold text-[#fbf8f1] shadow-[0_8px_18px_rgba(61,73,56,0.16)] transition hover:bg-[#52614a]">
-           Ask Question<span aria-hidden="true">-&gt;</span>
+        <div className="mt-6 flex flex-wrap items-center gap-4">
+          <Link href={`/documents/question/${id}`} className="inline-flex w-fit items-center gap-3 rounded-full bg-[#3d4938] px-5 py-3 text-sm font-semibold text-[#fbf8f1] shadow-[0_8px_18px_rgba(61,73,56,0.16)] transition hover:bg-[#52614a]">
+            Ask Question<span aria-hidden="true">-&gt;</span>
           </Link>
+          <Link href={`/quiz?id=${id}`} className="inline-flex w-fit items-center gap-3 rounded-full border border-[#3d4938] px-5 py-3 text-sm font-semibold text-[#3d4938] transition hover:bg-[#3d4938] hover:text-[#fbf8f1]">
+            Take Quiz<span aria-hidden="true">-&gt;</span>
+          </Link>
+        </div>
       </Container>
     </main>
   );
